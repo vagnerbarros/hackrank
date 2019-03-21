@@ -1,0 +1,19 @@
+{
+  "name": "hackrank",
+  "version": "1.0.0",
+  "description": "hackrank",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vagnerbarros/hackrank.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vagnerbarros/hackrank/issues"
+  },
+  "homepage": "https://github.com/vagnerbarros/hackrank#readme"
+}
