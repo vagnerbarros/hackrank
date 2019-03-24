@@ -1,6 +1,7 @@
 function matchingStrings(strings, queries) {
 
     let result = [];
+    
     for(let i = 0; i < queries.length; i++){
         let query = queries[i];
         let found = strings.filter(string => string === query);
