@@ -41,22 +41,13 @@ public class LevelOrder {
 	    
 	    if(level < 0) {	    	
 	    	String [] pairs = elements.split(" ");
-	    	java.util.List<Element> elements = new java.util.ArrayList<Element>();
-	    	for(String pair : pairs) {
-	    		String [] nodeOrder = pair.split(",");
-	    		Element element = new Element(Integer.parseInt(nodeOrder[0]), Integer.parseInt(nodeOrder[1]));
-	    		elements.add(element);
-	    	}
-	    	elements.sort(new java.util.Comparator<Element>() {
-				@Override
-				public int compare(Element e1, Element e2) {
-					// TODO Auto-generated method stub
-					return e1.level - e2.level;
-				}
-	    	});
-	    	
-	    	for(Element e : elements) {
-	    		System.out.print(e.data + " ");
+	    	for(int order = 0; order < pairs.length; order++) {
+	    		for(String pair : pairs) {
+	    			String [] nodeOrder = pair.split(",");
+	    			if(Integer.parseInt(nodeOrder[1]) == order) {
+	    				System.out.print(nodeOrder[0] + " ");
+	    			}
+	    		}
 	    	}
 	    }
     }
