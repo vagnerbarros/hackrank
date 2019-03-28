@@ -6,35 +6,90 @@ public class Lca {
 
 	static Node [] parents = new Node[25];
 	static int top = 0;
-	static boolean found1 = false;
+	static boolean found = false;
 	
-	public static Node lca(Node root, int v1, int v2) {
-      	// Write your code here.
+	public static void lacAux(Node root, int value) {
+		
 		if(root != null) {
-			int value = found1 ? v2 : v1;
 			if(root.data == value) {
-				if(!found1) {
-					found1 = true;
+				if(!found) {
+					parents[top] = root;
+					++top;
+					found = true;
 				}
-				else {
-					return parents[top];
+			}
+			
+			if(root.left != null || root.right != null) {					
+				if(!found) {					
+					parents[top] = root;
+					++top;
 				}
 			}
 			
 			if(root.left != null) {
-				lca(root.left, v1, v2);
+				lacAux(root.left, value);
 			}
 			
 			if(root.right != null) {
-				lca(root.right, v1, v2);
+				lacAux(root.right, value);
 			}
 			
-			if(found1) {
-				parents[top] = root;
-				++top;
+			if(root.left != null || root.right != null) {					
+				if(!found) {					
+					--top;
+				}
 			}
 		}
-		return root;
+	}
+	
+	public static Node lca(Node root, int v1, int v2) {
+		
+      	// Write your code here.
+		lacAux(root, v1);
+		Node [] parents1 = parents;
+		int top1 = top;
+		
+		parents = new Node[25];
+		top = 0;
+		found = false;
+		
+		lacAux(root, v2);
+		Node [] parents2 = parents;
+		int top2 = top;
+		
+		Node min = null;
+		if(top1 == 0 || top2 == 0) {
+			if(top1 > 0) {
+				min = parents1[0];
+			}
+			else if(top2 > 0) {
+				min = parents2[0];
+			}
+			return min;
+		}
+		else {
+			
+			int level = -1;
+			for(int i = top1 - 1; i >= 0; i--) {
+				Node node1 = parents1[i];
+				boolean exist = false;
+				for(int j = top2 - 1; j >= 0; j--) {
+					Node node2 = parents2[j];
+					if(node1.data == node2.data) {
+						exist = true;
+						break;
+					}
+				}
+				if(exist) {
+					if(min == null) {
+						min = node1;
+						break;
+					}
+				}
+			}
+			
+			return min;
+		}		
     }
 
 	public static Node insert(Node root, int data) {
