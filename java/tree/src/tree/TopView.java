@@ -1,6 +1,7 @@
 package tree;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 public class TopView {
 	
@@ -49,23 +50,54 @@ public class TopView {
       
         topViewAux(root);
         
+        int topLeft = 0;
+        int topRight = 0;
+        int [] stackLeft = new int[500];
+        int [] stackRight = new int[500];
+        int rootValue = 0;
+        
         String [] nodes = data.split(" ");
-        int level = maxHeight;
-        for(int wl = minWidth; wl <= maxWidth; wl++) {
-        	
+        for(int level = 0, wl = 0, wr = 0; level <= maxHeight; level++) {
+        	boolean slotLeft = false;
+        	boolean slotRight = false;
         	for(String node : nodes) {
     			String [] nodeInfo = node.split(",");
-    			if(Integer.parseInt(nodeInfo[2]) == wl && Integer.parseInt(nodeInfo[1]) == level) {
-    				System.out.println(nodeInfo[0] + " " + nodeInfo[1] + "|" + level + " " + nodeInfo[2]);
+    			if(Integer.parseInt(nodeInfo[1]) == level && ( Integer.parseInt(nodeInfo[2]) == wl || Integer.parseInt(nodeInfo[2]) == wr)) {
+    				if(level == 0) {
+    					rootValue = Integer.parseInt(nodeInfo[0]);
+    					slotLeft = true;
+    					slotRight = true;
+    					break;
+    				}
+    				else {
+    					if(Integer.parseInt(nodeInfo[2]) == wl) {
+    						slotLeft = true;
+    						stackLeft[topLeft] = Integer.parseInt(nodeInfo[0]);
+    						topLeft++;
+    					}
+    					if(Integer.parseInt(nodeInfo[2]) == wr) {
+    						slotRight = true;
+    						stackRight[topRight] = Integer.parseInt(nodeInfo[0]);
+    						topRight++;
+    					}
+    				}
     			}
     		}
-        	if(level > 0) {
-				level--;
+        	if(slotLeft) {        		
+        		wl -= 1;
         	}
-        	else {
-        		level++;
+        	if(slotRight) {        		
+        		wr += 1;
         	}
     	}
+        
+        for(int i = topLeft - 1; i >= 0; i--) {
+        	System.out.print(stackLeft[i] + " ");
+        }
+        System.out.print(rootValue + " ");
+        for(int j = 0; j <= topRight - 1; j++) {
+        	System.out.print(stackRight[j] + " ");
+        }
     }
 
 	public static Node insert(Node root, int data) {
