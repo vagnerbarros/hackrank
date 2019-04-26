@@ -1,18 +1,19 @@
 // Complete the taumBday function below.
 function taumBday(b, w, bc, wc, z) {
 
+    // fails to big numbers
     if(bc > wc + z){
-        let gift = ((Number(w) + Number(b)) * Number(wc));
-        let conversion = Number(b) * Number(z);
-        return Number(gift) + Number(conversion);
+        let gift = (w + b) * wc;
+        let conversion = b * z;
+        return gift + conversion;
     }
     else if(wc > bc + z){
-        let gift = ((Number(b) + Number(w)) * Number(bc));
-        let conversion = (Number(w) * Number(z));
-        return Number(gift) + Number(conversion);
+        let gift = (b + w) * bc;
+        let conversion = (w * z);
+        return gift + conversion;
     }
     else{
-        return (Number(b) * Number(bc)) + (Number(w) * Number(wc));
+        return (b * bc) + (w * wc);
     }
 }
 
