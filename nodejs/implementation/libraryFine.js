@@ -21,13 +21,13 @@ function libraryFine(d1, m1, y1, d2, m2, y2) {
 
 function main() {
     
-    let d1 = 9;
-    let m1 = 6;
-    let y1 = 2015;
+    let d1 = 24;
+    let m1 = 12;
+    let y1 = 1898;
 
-    let d2 = 6;
-    let m2 = 6;
-    let y2 = 2015;
+    let d2 = 18;
+    let m2 = 9;
+    let y2 = 1898;
 
     let result = libraryFine(d1, m1, y1, d2, m2, y2);
     console.log(result);
